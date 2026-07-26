@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- 컨트롤러에서 redirectAttributes.addFlashAttribute("message", ...)로 넘겨준 message가 존재할 때만 -->
+<div th:if="${message}">
+    <!-- message 변수의 텍스트 -->
+    <h2 th:text="${message}">업로드 메시지가 표시되는 곳</h2>
+</div>
+
+<div>
+    <!-- enctype="multipart/form-data" 대용량 바이너리 파일 데이터를 전송하기 위한 폼 전송 타입 -->
+    <form method="POST" enctype="multipart/form-data" action="/">
+        <table>
+            <tr>
+                <td>File to upload:</td>
+                <!-- name="file" 컨트롤러의 @RequestParam("file") MultipartFile file 과 이름이 일치해야 함 -->
+                <td><input type="file" name="file" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Upload" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div>
+    <ul>
+        <!-- 컨트롤러에서 model.addAttribute("files", List<String>)로 넘겨준 URL 목록을 반복문으로 실행 -->
+        <li th:each="file : ${files}">
+            <!-- href 속성에 파일 다운로드 URL 주소 세팅 -->
+            <!-- 텍스트로 URL 주소 출력 -->
+            <a th:href="${file}" th:text="${file}">파일 URL 주소</a>
+        </li>
+    </ul>
+</div>
+
+
+
+</body>
+</html>
