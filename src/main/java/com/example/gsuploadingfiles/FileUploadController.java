@@ -37,7 +37,7 @@ public class FileUploadController {
                 path -> MvcUriComponentsBuilder.fromMethodName(
                         FileUploadController.class, // URL 매핑 정보를 추출할 컨트롤러
                         "serveFile",    // 연결할 메서드 이름
-                        path.getFileName().toString())  // 메서드의 파라미터로 전달할 실제 파일명
+                        path.toString())  // 메서드의 파라미터로 전달할 실제 파일명
                         .build()    // 파일명을 URL 경로 안의 변수 자리에 실제로 치환하여 완성시킴
                         .toUri()    // 스프링 전용 객체 -> 자바 표준 네트워크 객체로 변환
                         .toString() // HTML에서 쓸 수 있게 문자열로
